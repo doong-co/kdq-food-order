@@ -42,7 +42,9 @@ module.exports = (opts) ->
           return if err
           len = _.size(rows) + 1
           console.log "abc", len
-          ss.add { len: { 5: len, 6: stt } }
+          order = {}
+          order[len] = { 1: len, 2: stt, 4: username }
+          ss.add order
           ss.send (err) ->
             return if err
             res.send "OK"
