@@ -21,7 +21,9 @@ module.exports = (opts) ->
       loadMenu (err, ss) ->
         return if err
 
-        console.log "abc"
+        ss.receive (err, rows, info) ->
+          if err throw err
+          console.log("Found rows:", rows)
 
       return res.send "OK"
 
