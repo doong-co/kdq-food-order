@@ -37,6 +37,7 @@ module.exports = (opts) ->
           return if err
           content = ""
           _.each rows, (row) ->
+            return if row["5"] is 1
             content += row["4"] + ": " + row["3"] + "\n"
           return res.send content
 
@@ -53,11 +54,11 @@ module.exports = (opts) ->
               console.log row["1"]
               result = row if row["1"] is Number(stt)
             return res.send "ERROR" if !result
-            
+
             ss.receive (err, rows, info) ->
               len = _.size(rows) + 1
               order = {}
-              order[len] = { 1: len - 1, 2: stt, 3: result["2"], 4: username }
+              order[len] = { 1: len - 1, 2: stt, 3: result["2"], 4: username, 5: 0 }
               ss.add order
               ss.send (err) ->
                 return if err
@@ -66,6 +67,16 @@ module.exports = (opts) ->
     if command is "cancel"
       loadSheet "orders", (err, ss) ->
         return if err
+        ss.receive (err, rows, info) ->
+          _.each rows, (row) ->
+            if row["4"] is username
+              row[5] = 1
+
+          ss.add rows
+          ss.send (err) ->
+            return if err
+            res.send "Bạn đã hủy món thành công"
+
 
       return res.send "OK"
     
