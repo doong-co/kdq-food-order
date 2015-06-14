@@ -50,6 +50,7 @@ module.exports = (opts) ->
           loadSheet "menu", (err, ssMenu) ->
             return if err
             ssMenu.receive (err, rowsMenu, info) ->
+              result = undefined
               _.each rowsMenu, (row) ->
                 result = row if row["1"] is stt
 
