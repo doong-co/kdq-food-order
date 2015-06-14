@@ -29,7 +29,7 @@ module.exports = (opts) ->
             return if index is 0
             content += row["1"] + ": " + row["2"] + "\n"
 
-            return res.send content      
+          return res.send content      
 
     if command is ""
       return res.send "OK"
@@ -40,8 +40,8 @@ module.exports = (opts) ->
     if command is "cancel"
       return res.send "OK"
     
-    console.log req.query
-    res.send "NOT SUPPORT"
+    # console.log req.query
+    # res.send "NOT SUPPORT"
 
   loadMenu = (loadSuccess) ->
     Spreadsheet.load
