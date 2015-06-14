@@ -22,7 +22,7 @@ module.exports = (opts) ->
         return if err
 
         ss.receive (err, rows, info) ->
-          if err throw err
+          return if err
           console.log("Found rows:", rows)
 
       return res.send "OK"
