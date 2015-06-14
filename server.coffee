@@ -19,6 +19,8 @@ module.exports = (opts) ->
 
     if command is "menu"
       loadMenu (err, ss) ->
+        return if err
+
         console.log "abc"
 
       return res.send "OK"
@@ -38,9 +40,9 @@ module.exports = (opts) ->
   loadMenu = (loadSuccess) ->
     Spreadsheet.load
       debug: true
-      spreadsheetName: "abc"
-      worksheetName: "Sheet1"
-      accessToken:
-        type: "Bearer"
-        token: "AIzaSyB-CtsNplWBP4IE8dzdG_ncwaNL_iAAAEY"
+      spreadsheetName: "kdq-food-orders"
+      worksheetName: "menu"
+      oauth:
+        email: "174490504370-s80tnmbic7hl2cthccdke4e188j0790i@developer.gserviceaccount.com"
+        keyFile: "google-oauth.pem"
     , loadSuccess
