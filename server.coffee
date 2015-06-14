@@ -8,8 +8,8 @@ module.exports = (opts) ->
   
   app.listen opts.port
 
-  app.get "/food", (req, res) ->
-    console.log req.params
+  app.post "/food", (req, res) ->
+    console.log req.query
     console.log req.body
     console.log req.header
 
