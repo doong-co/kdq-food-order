@@ -68,11 +68,13 @@ module.exports = (opts) ->
       loadSheet "orders", (err, ss) ->
         return if err
         ss.receive (err, rows, info) ->
+          newOrder = []
           _.each rows, (row) ->
             if row["4"] is username
               row[5] = 1
+              newOrder.push row
 
-          ss.add rows
+          ss.add newOrder
           ss.send (err) ->
             return if err
             res.send "Bạn đã hủy món thành công"
