@@ -64,6 +64,7 @@ module.exports = (opts) ->
   loadSheet = (sheetName, loadSuccess) ->
     Spreadsheet.load
       debug: true
+      useCellTextValues: true
       spreadsheetName: "kdq-food-orders"
       worksheetName: sheetName
       oauth:
