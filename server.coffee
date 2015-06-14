@@ -13,5 +13,5 @@ module.exports = (opts) ->
     if token isnt "Nu7nYM6V2Izg26blK8Gi3EYW"
       return res.send "ERROR"
 
-    console.log req.body
-    res.send req.body
+    console.log req.params
+    res.send req.params
