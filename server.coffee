@@ -42,8 +42,7 @@ module.exports = (opts) ->
           return if err
           len = _.size(rows) + 1
 
-          ss.add { 3: { 5: "hello!" } }
-          # ss.add {len: {1: stt, 3: username} }
+          ss.add { len: { 1: len, 2: stt, 4: username } }
           ss.send (err) ->
             return if err
             res.send "OK"
