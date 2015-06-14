@@ -41,12 +41,12 @@ module.exports = (opts) ->
         ss.receive (err, rows, info) ->
           return if err
           len = rows.length
-          ss.add {len: {1: stt, 3: username} }
+          ss.add {len + 1: {1: stt, 3: username} }
 
           ss.send (err) ->
             return if err
             res.send "OK"
-            
+
     if command is "cancel"
       return res.send "OK"
     
