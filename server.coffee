@@ -1,5 +1,6 @@
 express = require "express"
 Spreadsheet = require "edit-google-spreadsheet"
+_ = require "lodash"
 
 module.exports = (opts) ->
 
@@ -23,9 +24,12 @@ module.exports = (opts) ->
 
         ss.receive (err, rows, info) ->
           return if err
-          console.log("Found rows:", rows)
+          content = ""
+          _.each rows, (row, index) ->
+            return if index is 0
+            content += row["1"] + ": " + row["2"] + "\n"
 
-      return res.send "OK"
+            return res.send content      
 
     if command is ""
       return res.send "OK"

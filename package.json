@@ -6,7 +6,8 @@
   "dependencies": {
     "coffee-script": "~1.7.1",
     "edit-google-spreadsheet": "^0.2.19",
-    "express": "~4.9.x"
+    "express": "~4.9.x",
+    "lodash": "^3.9.3"
   },
   "scripts": {
     "start": "node run.js"
