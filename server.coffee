@@ -45,25 +45,23 @@ module.exports = (opts) ->
         return if err
         stt = command.split(" ")[1]
 
-        ss.receive (err, rows, info) ->
+        loadSheet "menu", (err, ssMenu) ->
           return if err
-          loadSheet "menu", (err, ssMenu) ->
-            return if err
-            ssMenu.receive (err, rowsMenu, info) ->
-              result = undefined
-              _.each rowsMenu, (row) ->
-                console.log row["1"]
-                result = row if row["1"] is stt
-              return res.send "ERROR" if !result
-              
-              ss.receive (err, rows, info) ->
-                len = _.size(rows) + 1
-                order = {}
-                order[len] = { 1: len - 1, 2: stt, 3: result["2"], 4: username }
-                ss.add order
-                ss.send (err) ->
-                  return if err
-                  res.send "Bạn đã đặt món thành công"
+          ssMenu.receive (err, rowsMenu, info) ->
+            result = undefined
+            _.each rowsMenu, (row) ->
+              console.log row["1"]
+              result = row if row["1"] is Number(stt)
+            return res.send "ERROR" if !result
+            
+            ss.receive (err, rows, info) ->
+              len = _.size(rows) + 1
+              order = {}
+              order[len] = { 1: len - 1, 2: stt, 3: result["2"], 4: username }
+              ss.add order
+              ss.send (err) ->
+                return if err
+                res.send "Bạn đã đặt món thành công"
 
     if command is "cancel"
       loadSheet "orders", (err, ss) ->
