@@ -52,8 +52,10 @@ module.exports = (opts) ->
             ssMenu.receive (err, rowsMenu, info) ->
               result = undefined
               _.each rowsMenu, (row) ->
+                console.log row["1"]
                 result = row if row["1"] is stt
-
+              return res.send "ERROR" if !result
+              
               ss.receive (err, rows, info) ->
                 len = _.size(rows) + 1
                 order = {}
@@ -64,6 +66,9 @@ module.exports = (opts) ->
                   res.send "Bạn đã đặt món thành công"
 
     if command is "cancel"
+      loadSheet "orders", (err, ss) ->
+        return if err
+
       return res.send "OK"
     
     # console.log req.query
