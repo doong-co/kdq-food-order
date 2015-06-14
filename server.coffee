@@ -8,11 +8,11 @@ module.exports = (opts) ->
   
   app.listen opts.port
 
-  app.post "/food", (req, res) ->
+  app.get "/food", (req, res) ->
     console.log req.params
     console.log req.body
     console.log req.header
-    
+
     token = req.params.token
     if token isnt "Nu7nYM6V2Izg26blK8Gi3EYW"
       return res.send "ERROR"
