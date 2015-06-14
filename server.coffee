@@ -40,7 +40,7 @@ module.exports = (opts) ->
 
         ss.receive (err, rows, info) ->
           return if err
-          len = rows.length + 1
+          len = _.size(rows) + 1
           ss.add {len: {1: stt, 3: username} }
 
           ss.send (err) ->
