@@ -19,35 +19,45 @@ module.exports = (opts) ->
       return res.send "ERROR"
 
     if command is "menu"
-      loadMenu (err, ss) ->
+      loadSheet "menu", (err, ss) ->
         return if err
 
         ss.receive (err, rows, info) ->
           return if err
           content = ""
-          _.each rows, (row, index) ->
-            return if index is 0
+          _.each rows, (row) ->
             content += row["1"] + ": " + row["2"] + "\n"
 
-          return res.send content      
+          return res.send content
 
     if command is ""
       return res.send "OK"
 
     if command.indexOf("order") > -1
-      return res.send "OK"
+      loadSheet "orders", (err, ss) ->
+        return if err
+        stt = command.split(" ")[1]
 
+        ss.receive (err, rows, info) ->
+          return if err
+          len = rows.length
+          ss.add {len: {1: stt, 3: username} }
+
+          ss.send (err) ->
+            return if err
+            res.send "OK"
+            
     if command is "cancel"
       return res.send "OK"
     
     # console.log req.query
     # res.send "NOT SUPPORT"
 
-  loadMenu = (loadSuccess) ->
+  loadSheet = (sheetName, loadSuccess) ->
     Spreadsheet.load
       debug: true
       spreadsheetName: "kdq-food-orders"
-      worksheetName: "menu"
+      worksheetName: sheetName
       oauth:
         email: "174490504370-s80tnmbic7hl2cthccdke4e188j0790i@developer.gserviceaccount.com"
         keyFile: "google-oauth.pem"
