@@ -31,7 +31,14 @@ module.exports = (opts) ->
           return res.send content
 
     if command is ""
-      return res.send "OK"
+      loadSheet "orders", (err, ss) ->
+        return if err
+        ss.receive (err, rows, info) ->
+          return if err
+          content = ""
+          _.each rows, (row) ->
+            content += row["4"] + ": " + row["3"] + "\n"
+          return res.send content
 
     if command.indexOf("order") > -1
       loadSheet "orders", (err, ss) ->
@@ -42,11 +49,11 @@ module.exports = (opts) ->
           return if err
           len = _.size(rows) + 1
           order = {}
-          order[len] = { 1: len - 1, 2: stt, 4: username }
+          order[len] = { 1: len - 1, 2: stt, 3: "=VLOOKUP(B#{len},menu!A4:B13,2,FALSE)", 4: username }
           ss.add order
           ss.send (err) ->
             return if err
-            res.send "OK"
+            res.send "Bạn đã đặt món thành công"
 
     if command is "cancel"
       return res.send "OK"
