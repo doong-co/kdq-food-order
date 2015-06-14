@@ -1,0 +1,13 @@
+{
+  "name": "SExtr",
+  "description": "SExtr",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "coffee-script": "~1.7.1",
+    "express": "~4.9.x"
+  },
+  "scripts": {
+    "start": "node run.js"
+  }
+}
