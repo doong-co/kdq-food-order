@@ -10,4 +10,5 @@ module.exports = (opts) ->
 
   app.post "/food", (rep, res) ->
     console.log rep.body
+    res.send "OK"
 
