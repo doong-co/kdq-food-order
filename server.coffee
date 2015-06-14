@@ -41,8 +41,8 @@ module.exports = (opts) ->
         ss.receive (err, rows, info) ->
           return if err
           len = _.size(rows) + 1
-
-          ss.add { len: { 1: len, 2: stt, 4: username } }
+          console.log "abc", len
+          ss.add { len: { 1: len, 2: stt } }
           ss.send (err) ->
             return if err
             res.send "OK"
