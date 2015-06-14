@@ -76,9 +76,6 @@ module.exports = (opts) ->
           ss.send (err) ->
             return if err
             res.send "Bạn đã hủy món thành công"
-
-
-      return res.send "OK"
     
     # console.log req.query
     # res.send "NOT SUPPORT"
