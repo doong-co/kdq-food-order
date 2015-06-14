@@ -50,8 +50,8 @@ module.exports = (opts) ->
           loadSheet "menu", (err, ssMenu) ->
             return if err
             ssMenu.receive (err, rowsMenu, info) ->
-              result = _.find rowsMenu, (row) ->
-                row["1"] is stt
+              _.each rowsMenu, (row) ->
+                result = row if row["1"] is stt
 
               ss.receive (err, rows, info) ->
                 len = _.size(rows) + 1
