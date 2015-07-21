@@ -7,7 +7,7 @@ module.exports = (opts) ->
   app = express()
 
   app.use "/", express.static __dirname + "/app"
-  
+
   app.listen opts.port
 
   app.get "/food", (req, res) ->
@@ -15,7 +15,7 @@ module.exports = (opts) ->
     username = req.query.user_name
     command = req.query.text
 
-    if token isnt "Nu7nYM6V2Izg26blK8Gi3EYW"
+    if token isnt "wHyoVmVpoXMGWOjJXTV0A1FC"
       return res.send "ERROR"
 
     if command is "menu"
@@ -78,7 +78,7 @@ module.exports = (opts) ->
           ss.send (err) ->
             return if err
             res.send "Bạn đã hủy món thành công"
-    
+
     # console.log req.query
     # res.send "NOT SUPPORT"
 
